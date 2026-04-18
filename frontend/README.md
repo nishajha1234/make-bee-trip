@@ -1,3 +1,0 @@
-deployment
-readmde
-github
