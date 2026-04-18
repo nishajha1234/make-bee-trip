@@ -64,21 +64,27 @@ make-bee-trip/
 ## ⚙️ Setup Instructions
 
 ### 1. Clone Repository
+```bash
 git clone https://github.com/nishajha1234/make-bee-trip.git
 cd make-bee-trip
+```
 
 ### 2. Run Backend
+```bash
 cd backend
 npm install
 node src/server.js
+```
 
 Server runs on:
 http://localhost:5000
 
 ### 2. Run Frontend
+```
 cd frontend
 npm install
 npm run dev
+```
 
 App runs on:
 
