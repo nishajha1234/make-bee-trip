@@ -82,12 +82,14 @@ npm run dev
 App runs on:
 
 http://localhost:5173
-🔗 API Endpoints
-Endpoint	Description
-/api/travel?type=flight	Get flights
-/api/travel?type=bus	Get buses
-/api/travel?type=train	Get trains
-/api/travel?type=hotel	Get hotels
+## 🔗 API Endpoints
+
+| Endpoint | Description |
+|----------|------------|
+| `/api/flights` | Get flights |
+| `/api/buses` | Get buses |
+| `/api/trains` | Get trains |
+| `/api/hotels` | Get hotels |
 
 ❗ Error Handling
 Backend returns structured error responses
