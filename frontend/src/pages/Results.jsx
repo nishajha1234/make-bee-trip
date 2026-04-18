@@ -1,7 +1,7 @@
 // pages/Results.jsx
 
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import {
   getFlights,
@@ -20,6 +20,8 @@ const Results = () => {
   const [loading, setLoading] = useState(true);
 
   const location = useLocation();
+  const navigate = useNavigate(); // ✅ FIXED (inside component)
+
   const query = new URLSearchParams(location.search);
 
   const type = query.get("type");
@@ -67,72 +69,82 @@ const Results = () => {
     <div className="bg-gray-50 min-h-screen">
 
       {/* ================= TOP SEARCH SUMMARY ================= */}
-<div className="bg-white border-b sticky top-0 z-10">
-  <div className="max-w-6xl mx-auto px-4 md:px-6 py-4">
+      <div className="bg-white border-b sticky top-0 z-10">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 py-4">
 
-    <h2 className="text-lg md:text-xl font-semibold text-gray-800">
-      {isHotel
-        ? `Stays in ${city || "your destination"}`
-        : `${from || "From"} → ${to || "To"}`}
-    </h2>
+          <h2 className="text-lg md:text-xl font-semibold text-gray-800">
+            {isHotel
+              ? `Stays in ${city || "your destination"}`
+              : `${from || "From"} → ${to || "To"}`}
+          </h2>
 
-    <p className="text-sm mt-1">
-      {data.length === 0 ? (
-        <span className="text-red-500">
-          No results found
-        </span>
-      ) : (
-        <span className="text-gray-500 capitalize">
-          {type} • {data.length} options available
-        </span>
-      )}
-    </p>
+          <p className="text-sm mt-1">
+            {data.length === 0 ? (
+              <span className="text-red-500">
+                No results found
+              </span>
+            ) : (
+              <span className="text-gray-500 capitalize">
+                {type} • {data.length} options available
+              </span>
+            )}
+          </p>
 
-  </div>
-</div>
+        </div>
+      </div>
 
       {/* ================= MAIN CONTENT ================= */}
       <div className="max-w-6xl mx-auto px-4 md:px-6 py-8">
 
         {/* ================= NO RESULTS ================= */}
-        {/* ================= NO RESULTS ================= */}
-{!data || data.length === 0 ? (
-  <div className="bg-white border rounded-xl p-10 text-center shadow-sm">
+        {!data || data.length === 0 ? (
+          <div className="bg-white border rounded-xl p-10 text-center shadow-sm">
 
-    <h3 className="text-lg font-medium text-gray-700 mb-2">
-      No results found
-    </h3>
+            <h3 className="text-lg font-medium text-gray-700 mb-2">
+              No results found
+            </h3>
 
-    <p className="text-sm text-gray-500 mb-6">
-      Try adjusting your search or explore these options
-    </p>
+            <p className="text-sm text-gray-500 mb-6">
+              Try adjusting your search or explore these options
+            </p>
 
-    {/* 🔥 CLEAN SUGGESTIONS */}
-    <div className="flex flex-wrap justify-center gap-2">
-      {(isHotel
-        ? ["Delhi", "Mumbai", "Goa", "Jaipur"]
-        : [
-            { from: "Delhi", to: "Mumbai" },
-            { from: "Delhi", to: "Bangalore" },
-            { from: "Mumbai", to: "Delhi" },
-          ]
-      ).map((item, i) => {
-        const label = isHotel
-          ? item
-          : `${item.from} → ${item.to}`;
+            {/* 🔥 WORKING SUGGESTIONS */}
+            <div className="flex flex-wrap justify-center gap-2">
+              {(isHotel
+                ? ["Delhi", "Mumbai", "Goa", "Jaipur"]
+                : [
+                    { from: "Delhi", to: "Mumbai" },
+                    { from: "Delhi", to: "Bangalore" },
+                    { from: "Mumbai", to: "Delhi" },
+                  ]
+              ).map((item, i) => {
+                const label = isHotel
+                  ? item
+                  : `${item.from} → ${item.to}`;
 
-        return (
-          <button
-            key={i}
-            className="px-3 py-1.5 text-sm border rounded-full bg-gray-50 hover:bg-gray-100 transition"
-          >
-            {label}
-          </button>
-        );
-      })}
-    </div>
-  </div>
-) : (
+                const handleClick = () => {
+                  if (isHotel) {
+                    navigate(`/results?type=hotels&city=${item}`);
+                  } else {
+                    navigate(
+                      `/results?type=${type}&from=${item.from}&to=${item.to}`
+                    );
+                  }
+                };
+
+                return (
+                  <button
+                    key={i}
+                    onClick={handleClick}
+                    className="px-3 py-1.5 text-sm border rounded-full bg-gray-50 hover:bg-blue-50 hover:border-blue-400 cursor-pointer transition"
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
           <>
             {/* ================= RESULTS ================= */}
 
