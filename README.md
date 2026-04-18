@@ -38,6 +38,7 @@ A full-stack travel booking landing page built using **React.js** and **Node.js*
 ---
 
 ## 📁 Project Structure
+```
 make-bee-trip/
 │
 ├── frontend/
@@ -56,7 +57,7 @@ make-bee-trip/
 │ │ ├── data/
 │ │ ├── middleware/
 │ │ └── server.js
-
+```
 
 ---
 
