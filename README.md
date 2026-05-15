@@ -7,7 +7,7 @@ A full-stack travel booking landing page built using **React.js** and **Node.js*
 ## 🌐 Live Demo
 
 - **Frontend:** https://make-bee-trip-kappa.vercel.app/  
-- **Backend:** https://make-bee-trip-production.up.railway.app  
+- **Backend:** https://make-bee-trip-4lh0.onrender.com 
 
 ---
 
