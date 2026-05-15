@@ -7,9 +7,9 @@ const ErrorMessage = ({ message }) => {
     <div className="mb-5 flex justify-center">
       <div className="flex items-center gap-3 bg-red-600/20 border border-red-500/40 text-red-100 px-4 py-3 rounded-xl backdrop-blur-md shadow-md max-w-md w-full">
         
-        <AlertCircle size={18} className="text-red-300 shrink-0" />
+        <AlertCircle size={18} className="text-red-600 shrink-0" />
 
-        <p className="text-sm font-semibold leading-snug">
+        <p className="text-sm text-red-500 font-semibold leading-snug">
           {message}
         </p>
       </div>
